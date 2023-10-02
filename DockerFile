@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
+
+WORKDIR /app
+
+COPY . ./
+
+RUN donet restore "./api_proyecto_web/api_proyecto_web.csproj" --disable-parallel
+
+RUN donet restore "./api_proyecto_web/api_proyecto_web.csproj" -c release -o /app --no-restore
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /app
+
+COPY --from=build /app ./
+
+EXPOSE 5000:5000
+
+ENTRYPOINT ["dotnet", "api_proyecto_web.dll"]
