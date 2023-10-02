@@ -66,11 +66,11 @@ namespace api_proyecto_web.Controllers
             return servicioProducto.productoMasivo();
         }
         [HttpGet("BuscarProducto/{nombre}")]
-        public ObjectResult GetProducto(string nombre)
+        public ObjectResult GetProducto(string nombree)
         {
             try
             {
-                return Ok(servicioProducto.BuscarProducto(nombre));
+                return Ok(servicioProducto.BuscarProducto(nombree));
             
 
             }
